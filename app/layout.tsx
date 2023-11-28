@@ -5,6 +5,8 @@ import React from "react";
 // eslint-disable-next-line camelcase
 import { Inter, Space_Grotesk } from "next/font/google";
 import type { Metadata } from "next";
+import '../styles/prism.css'
+
 import "../styles/globals.css";
 import { ThemeProvider } from "@/context/ThemeProvider";
 
