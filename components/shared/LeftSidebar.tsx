@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { SignedOut } from "@clerk/nextjs";
 
 const LeftSidebar = () => {
+  const userId = "123456789";
   const pathname = usePathname();
 
   return (
@@ -22,6 +23,14 @@ const LeftSidebar = () => {
           const isActive =
             (pathname.includes(item.route) && item.route.length > 1) ||
             pathname === item.route;
+
+            if(item.route === '/profile') {
+              if(userId) {
+                item.route = `${item.route}/${userId}`
+              }else {
+                return null
+              }
+            }
           return (
             <Link
               key={item.route}
