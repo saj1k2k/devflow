@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { QuestionsSchema } from "@/lib/validations";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import {createQuestion, editQuestion} from "@/lib/actions/question.action";
+import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "@/context/ThemeProvider";
 
@@ -35,14 +35,15 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const parsedQuestionDetails = JSON.parse(questionDetails || "");
-  const groupedTags = parsedQuestionDetails.tags.map((tag) => tag.name);
+  const parsedQuestionDetails =
+    questionDetails && JSON.parse(questionDetails || "");
+  const groupedTags = parsedQuestionDetails?.tags.map((tag) => tag.name);
   // 1. Define your form.
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
     defaultValues: {
-      title: parsedQuestionDetails.title || "",
-      explanation: parsedQuestionDetails.content || "",
+      title: parsedQuestionDetails?.title || "",
+      explanation: parsedQuestionDetails?.content || "",
       tags: groupedTags || [],
     },
   });
@@ -157,7 +158,7 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
                     }}
                     onBlur={field.onBlur}
                     onEditorChange={(content) => field.onChange(content)}
-                    initialValue={parsedQuestionDetails.content || ""}
+                    initialValue={parsedQuestionDetails?.content || ""}
                     init={{
                       height: 350,
                       menubar: false,
@@ -205,7 +206,11 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
                       <div className="flex-start mt-2.5 gap-2.5">
                         {field.value.map((tag: any) => (
                           <Badge
-                            onClick={() => type !== "Edit" ? handleTagRemove(tag, field) : () => {}}
+                            onClick={() =>
+                              type !== "Edit"
+                                ? handleTagRemove(tag, field)
+                                : () => {}
+                            }
                             className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2 capitalize"
                             key={tag}
                           >

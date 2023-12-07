@@ -1,6 +1,6 @@
 import React from "react";
 import { URLProps } from "@/types";
-import { getUsersInfo } from "@/lib/actions/user.action";
+import { getUserInfo } from "@/lib/actions/user.action";
 import Image from "next/image";
 import Link from "next/link";
 import { SignedIn } from "@clerk/nextjs";
@@ -14,7 +14,7 @@ import AnswersTab from "@/components/shared/AnswersTab";
 
 const Page = async ({ params, searchParams }: URLProps) => {
   const clerkId = "123456789";
-  const userInfo = await getUsersInfo({ userId: params.id });
+  const userInfo = await getUserInfo({ userId: params.id });
   return (
     <>
       <div className="flex flex-col-reverse items-start justify-between sm:flex-row">
