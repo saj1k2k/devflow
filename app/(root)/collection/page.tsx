@@ -5,6 +5,7 @@ import NoResult from "@/components/shared/NoResult";
 import QuestionCard from "@/components/cards/QuestionCard";
 import {getSavedQuestions} from "@/lib/actions/user.action";
 import {SearchParamsProps} from "@/types";
+import Pagination from "@/components/shared/Pagination";
 // import {auth} from "@clerk/nextjs";
 
 export default async function Home({searchParams}: SearchParamsProps) {
@@ -15,6 +16,7 @@ export default async function Home({searchParams}: SearchParamsProps) {
         clerkId: userId,
         searchQuery: searchParams.q,
         filter: searchParams.filter,
+        page: searchParams.page ? +searchParams.page : 1
     });
 
     return (
@@ -60,6 +62,12 @@ export default async function Home({searchParams}: SearchParamsProps) {
                         linkTitle="Ask a question"
                     />
                 )}
+            </div>
+            <div className="mt-10">
+                <Pagination
+                    pageNumber={searchParams?.page ? +searchParams.page : 1}
+                    isNext={result.isNext}
+                />
             </div>
         </>
     );
