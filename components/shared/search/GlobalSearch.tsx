@@ -75,7 +75,7 @@ const GlobalSearch = () => {
                     type='text'
                     placeholder='Search globbaly'
                     className='paragraph-regular text-dark400_light700
-                    background-light800_darkgradient border-none shadow-none outline-none'
+                     bg-transparent border-none shadow-none outline-none'
                     value={search}
                     onChange={(e) => {
                         setSearch(e.target.value);
